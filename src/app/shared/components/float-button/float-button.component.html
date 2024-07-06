@@ -1,0 +1,43 @@
+<div class="float-button">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon class="rotate">settings</mat-icon>
+    </button>
+</div>
+
+<mat-menu #menu="matMenu" yPosition="above">
+    <div class="float-button">
+        <button mat-icon-button>
+            <mat-icon class="rotate">settings</mat-icon>
+        </button>
+    </div>
+
+    <div class="float-button">
+        <button mat-icon-button>
+            <mat-icon class="rotate">settings</mat-icon>
+        </button>
+    </div>
+
+    <div class="float-button">
+        <button mat-icon-button>
+            <mat-icon class="rotate">settings</mat-icon>
+        </button>
+    </div>
+
+    <div class="float-button">
+        <button mat-icon-button>
+            <mat-icon class="rotate">settings</mat-icon>
+        </button>
+    </div>
+    <button mat-menu-item (click)="addTransaction()">
+      <mat-icon>add</mat-icon>
+      <!-- <span>Agregar</span> -->
+    </button>
+    <button mat-menu-item (click)="modifyTransaction()">
+      <mat-icon>edit</mat-icon>
+      <!-- <span>Modificar</span> -->
+    </button>
+    <button mat-menu-item (click)="deleteTransaction()">
+      <mat-icon>delete</mat-icon>
+      <!-- <span>Eliminar</span> -->
+    </button>
+  </mat-menu>

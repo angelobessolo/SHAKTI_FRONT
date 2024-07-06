@@ -1,0 +1,167 @@
+<div class="container-dashboard d-flex flex-row">
+  <div class="container-sidebar-lateral drawer p-3" (mouseover)="onMouseOver()" [ngClass]="{'open': isDrawerOpen}">
+    <!-- <div class="d-flex gap-2">
+      <span>
+        <mat-icon class="large-icon">star</mat-icon>
+      </span>
+      @if (isOpen){
+        <h2>SHAKTI</h2>
+      }
+    </div> -->
+
+    <!-- <div class="drawer-header p-3">
+      <h3>{{navMenu.label}}</h3>
+    </div>
+    <div class="nav-container">
+      <ul class="nav-list">
+        @for (item of navMenu.menu; track item){
+          <li>
+            <div class="nav-item" (click)="toggleItem(item)">
+              <span class="nav-icon"><mat-icon class="large-icon">{{item.icon}}</mat-icon></span>
+              @if (isOpen) {
+                <span class="nav-name">{{item.name}}</span>
+              }
+            </div>
+            <ul *ngIf="item.isExpanded" class="sub-nav-list">
+              <li *ngFor="let subItem of item.children">
+                <div class="sub-nav-item">
+                  <span class="sub-nav-icon"><mat-icon>{{subItem.icon}}</mat-icon></span>
+                  <span class="sub-nav-name">{{subItem.name}}</span>
+                </div>
+              </li>
+            </ul>
+          </li>
+        }
+      </ul>
+    </div> -->
+  </div>
+
+  <div class="container-options" [ngClass]="{'open-sidenav': isDrawerOpen}">
+    <div class="d-flex gap-2" color="yellow" style="margin-left: 10px;">
+      <span style="color: yellow;">
+        <mat-icon class="large-icon-1">star</mat-icon>
+      </span>
+      @if (isOpen){
+        <h2>SHAKTI</h2>
+      }
+    </div>
+
+    <div class="drawer-header p-3">
+      @if (isOpen){
+        <h3 class="m-0">{{navMenu.label}}</h3>
+      }
+    </div>
+
+    <div class="nav-container">
+      <ul class="nav-list">
+        @for (item of navMenu1; track item){
+          <li>
+            <div class="nav-item" (click)="toggleItem1(item)">
+              <span><mat-icon class="large-icon" color="primary">{{item.moduleIcon}}</mat-icon></span>
+              @if (isOpen) {
+                <a class="nav-name nav-icon" [routerLink]="item.moduleRoute">{{item.moduleName}}</a>
+              }
+            </div>
+
+            @if (item.isExpanded) {
+              <ul class="sub-nav-list">
+                @for (subItem of item.submodules; track $index) {
+                  <li>
+                    <div class="sub-nav-item">
+                      <span class="sub-nav-icon"><mat-icon>{{subItem.submoduleIcon}}</mat-icon></span>
+                      <span class="sub-nav-name">{{subItem.submoduleName}}</span>
+                    </div>
+                  </li>
+                }
+              </ul>
+            }
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="content" [ngClass]="{'drawer-push': isDrawerOpen}">
+    <mat-toolbar color="primary" class=" toolbar d-flex justify-content-between">
+      @if (isOpen) {
+        <button mat-icon-button (click)="toggleDrawer()">
+          <mat-icon>close</mat-icon>
+        </button>
+      }@else {
+        <button mat-icon-button (click)="toggleDrawer()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      }
+
+      <div class="toolbar-actions d-flex flex-row justify-content-between gap-2">
+         <!-- Notifications -->
+         <app-notifications></app-notifications>
+        <!-- Notifications -->
+
+        <!-- Change Lenguage -->
+        <div> 
+          <button mat-icon-button [matMenuTriggerFor]="menuLenguage" style="padding: 0px;"> 
+            <img [src]="currentLenguage.flag" alt="Idioma app" width="24" height="24">
+          </button>
+
+          <mat-menu #menuLenguage="matMenu" class="d-flex">
+            @for (country of countries; track country) {
+              <button mat-menu-item class="menuLenguage" (click)="chancheLenguage(country)">
+                <div class="d-flex justify-content-evenly">
+                  <div class="d-flex flex-row justify-content-between">
+                    <img [src]=country.flag alt="Idioma Español" width="24px" height="24px">   
+                  </div>
+                  <div>  
+                    <span>{{country.code}}</span>
+                  </div>
+
+                </div>
+              </button>
+            }
+          </mat-menu>
+        </div>
+        <!-- Change Lenguage -->
+
+        <!-- Account settings -->
+        <div> 
+          <button mat-icon-button [matMenuTriggerFor]="menu" style="padding: 0px;"> 
+            <img src="https://uilibrary.github.io/matx-angular/assets/images/face-7.jpg" alt="" style="width: 48px; height: 48px; border-radius: 50px;"> 
+          </button>
+
+          <mat-menu #menu="matMenu">
+            <button  mat-menu-item>
+              <mat-icon>person</mat-icon>
+              <span>Perfil</span>
+            </button>
+
+            <button mat-menu-item>
+              <mat-icon>manage_accounts</mat-icon>
+              <span>Ajutes Generales</span>
+            </button>
+
+            
+            <button mat-menu-item>
+              <mat-icon>notifications</mat-icon>
+              <span>Notificaciones</span>
+            </button>
+            
+            <mat-divider></mat-divider>
+
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>logout</mat-icon>
+              <span>Salir</span>
+            </button>
+          </mat-menu>
+        </div>
+        <!-- Account settings -->
+
+      </div>
+    </mat-toolbar>
+
+    <div class="container-tool-content container-fluid p-3">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<app-float-button></app-float-button>
