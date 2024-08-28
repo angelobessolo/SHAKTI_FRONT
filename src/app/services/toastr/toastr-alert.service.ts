@@ -11,7 +11,15 @@ export class ToastrAlertService {
 
   showError(title: string, message: string) {
     this.toastr.error(message, title, {
-        timeOut: 2500,
+        timeOut: 3000,
+        closeButton: true,
+        progressBar: true,
+    });
+  }
+
+  showSucces(title: string, message: string) {
+    this.toastr.success(message, title, {
+        timeOut: 3000,
         closeButton: true,
         progressBar: true,
     });

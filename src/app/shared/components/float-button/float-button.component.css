@@ -1,36 +1,43 @@
-.float-button{
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
+.menu-button {
+  position: relative;
+  z-index: 10;
+}
+
+@keyframes moveButton {
+  from {bottom: 0; opacity: 1; visibility: hidden;}
+  to {bottom: var(--bottom-position); oopacity: 1; visibility: visible;}
+}
+
+@keyframes moveLabel {
+  from {bottom: 0; opacity: 1; visibility: hidden;}
+  to {bottom: var(--bottom-label-position); opacity: 1; visibility: visible;}
+}
+
+.action-button {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background-color: #ca6538;
+  right: 0;
+  visibility: hidden; /* Inicialmente oculto */
+  transition-property: opacity visibility;
+  animation: moveButton 0.5s forwards;
 }
 
-button{
-  color: #f7f2f0;
-  position: static;
-}
 
-.mat-menu-item {
-  display: flex;
-  align-items: center;
+.label {
+  position: absolute;
+  right: 3.5rem;
+  left: auto;
+  height: 25px;
+  width: 100px;
+  line-height: 25px;
+  min-height: 25px;
+  vertical-align: top;
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  color: white;
+  background-color: #ff9800;
+  border-radius: 5px;
+  visibility: hidden; /* Inicialmente oculto */
+  animation: moveLabel 0.5s forwards;
 }
-
-.mat-menu-item mat-icon {
-  margin-right: 8px;
-}
-
-@keyframes spin {
-    0% {
-      transform: rotateZ(0);
-    }
-    100% {
-      transform: rotateZ(360deg);
-    }
-  }
-  
-  .rotate {
-    animation: spin 2s linear infinite;
-  }

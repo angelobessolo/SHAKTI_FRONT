@@ -5,6 +5,7 @@ import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { AuthStatus, CheckToken, LoginResponse, User } from '../../pages/auth/interfaces/index-auth';
 import { ThisReceiver } from '@angular/compiler';
 import { DOCUMENT } from '@angular/common';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Injectable({
@@ -14,6 +15,7 @@ export class AuthService {
 
   private readonly baseUrl: string = environment.baseUrl;
   private http = inject(HttpClient);
+  private spinner = inject(NgxSpinnerService);
 
   private _currentUser = signal<User|null>(null);
   private _authStatus = signal<AuthStatus>( AuthStatus.checking );
@@ -94,10 +96,21 @@ export class AuthService {
     return true
   }
 
-  logout() {
+  logout(): Observable<boolean> {
     localStorage.removeItem('token');
     this._currentUser.set(null);
-    this._authStatus.set( AuthStatus.notAuthenticated )
+    this._authStatus.set( AuthStatus.notAuthenticated );
+    return of(true);
+  }
+
+  showSpinner(){
+     /** spinner starts on init */
+     this.spinner.show();
+
+     setTimeout(() => {
+       /** spinner ends after 5 seconds */
+       this.spinner.hide();
+     }, 5000);
   }
 
 

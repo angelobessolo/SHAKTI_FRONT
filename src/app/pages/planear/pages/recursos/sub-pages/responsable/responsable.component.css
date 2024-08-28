@@ -1,0 +1,39 @@
+table {
+    width: 100%;
+}
+  
+.mat-mdc-form-field {
+font-size: 14px;
+width: 100%;
+}
+
+td, th {
+width: 25%;
+}
+
+.raw.selected-raw{
+    background-color: rgb(89 127 160 / 51%);;
+}
+
+.spinner-service{
+    height: 50px !important;
+    width: 50px !important;
+}
+  
+
+.fixed-table {
+    width: 100%;
+}
+
+.fixed-column {
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden; /* Oculta el desbordamiento */
+    text-overflow: ellipsis; /* Agrega "..." si el texto es demasiado largo */
+}
+
+mat-tab-header {
+    margin-bottom: 16px; /* Ajusta el valor según tus necesidades */
+}
+
+
+ 

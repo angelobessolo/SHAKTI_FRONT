@@ -92,10 +92,25 @@ input {
 }
 
 .container-login {
-  background-image: url('../../../../assets/images/background-login.png');
-  width: 100wh;
+  /* background-image: url('../../../../assets/images/background-login.png'); */
+  /* background-color: #fa9500a3; */
+  background-color: #fa95002b;
+  width: 100vw;
   height: 100vh;
   align-content: center;
+}
+
+.container-login::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('../../../../assets/images/background-login.png') no-repeat center center;
+  background-size: cover;
+  filter: blur(6px); /* Ajusta el nivel de desenfoque */
+  z-index: -1; /* Asegura que el pseudo-elemento esté detrás del contenido */
 }
 
 .form-container {
@@ -143,92 +158,9 @@ input {
   }
 }
 
-.overlay-container {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 50%;
-  height: 100%;
-  overflow: hidden;
-  transition: transform 0.6s ease-in-out;
-  z-index: 100;
-}
-
 .container.right-panel-active .overlay-container {
   transform: translateX(-100%);
 }
-
-.overlay {
-  background: #ff416c;
-  background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 0 0;
-  color: #ffffff;
-  position: relative;
-  left: -100%;
-  height: 100%;
-  width: 200%;
-  transform: translateX(0);
-  transition: transform 0.6s ease-in-out;
-}
-
-.container.right-panel-active .overlay {
-  transform: translateX(50%);
-}
-
-.overlay-panel {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0 40px;
-  text-align: center;
-  top: 0;
-  height: 100%;
-  width: 50%;
-  transform: translateX(0);
-  transition: transform 0.6s ease-in-out;
-}
-
-.overlay-left {
-  transform: translateX(-20%);
-}
-
-.container.right-panel-active .overlay-left {
-  transform: translateX(0);
-}
-
-.overlay-right {
-  right: 0;
-  transform: translateX(0);
-}
-
-.container.right-panel-active .overlay-right {
-  transform: translateX(20%);
-}
-
-.social-container {
-  margin: 20px 0;
-}
-
-.social-container a {
-  border: 1px solid #dddddd;
-  border-radius: 50%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 5px;
-  height: 40px;
-  width: 40px;
-}
-
-
-
-
-
 
 /* Clases del formulario de login */
 .example-container mat-form-field + mat-form-field {
@@ -253,4 +185,51 @@ input.example-right-align::-webkit-inner-spin-button {
 } */
 /* Clases del formulario de login */
 
+
+
+.main-login-company{
+  background-image: url('../../../../assets/images/2149919543.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.rigth-login-company{
+  background-image: url('../../../../assets/logos/logo.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 100px;
+  height: 100px;
+  position: fixed; 
+  top: 12%;
+  left: 47%;
+  z-index: 1;
+}
+
+.rigth-login-company{
+  animation: spin 2s ease-in;
+  
+}
+
+
+
+
+
+/* Definir la animación */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.main-login{
+  /* clip-path: polygon(18% 0, 100% 0, 100% 75%, 82% 100%, 0 100%, 0% 25%); */
+  clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0% 10%);
+}
 

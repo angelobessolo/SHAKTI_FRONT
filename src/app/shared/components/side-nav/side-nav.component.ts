@@ -8,7 +8,7 @@ import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource, MatTreeModule} from '@angular/material/tree';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
-import { Items, NavMenu, UserParams } from '../../interfaces/nav-menu-interface';
+import { Items, NavMenu, SubmoduleResponse, UserParams } from '../../interfaces/nav-menu-interface';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FloatButtonComponent } from '../float-button/float-button.component';
@@ -17,6 +17,7 @@ import { Observable, debounceTime, distinctUntilChanged, map } from 'rxjs';
 import { NotificationsComponent } from '../notifications/notifications.component';
 import {MatDividerModule} from '@angular/material/divider';
 import { AuthService } from '../../../services/auth/auth.service';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 
 
 
@@ -35,6 +36,7 @@ import { AuthService } from '../../../services/auth/auth.service';
     MatTreeModule, 
     MatIconModule, 
     MatToolbarModule,
+    NgxSpinnerModule, 
     MatMenuModule,
     CommonModule,
     FormsModule,
@@ -47,7 +49,8 @@ import { AuthService } from '../../../services/auth/auth.service';
 
 export class SideNavComponent implements OnInit {
   private authService = inject(AuthService);
-  private router = inject(Router);
+  private spinner     = inject(NgxSpinnerService);
+  private router      = inject(Router);
 
   @Input() navMenu1: UserParams[] = [];
   public opened: boolean = false;
@@ -200,14 +203,11 @@ export class SideNavComponent implements OnInit {
   ];
 
   public currentLenguage = this.countries[0];
-  
-  constructor(
-    router: Router
-  ) {}
 
   ngOnInit(): void {
     // Inicializamos el estado de expansión
     this.navMenu.menu.forEach(item => item.isExpanded = false);
+    console.log('menu completo', this.navMenu1);
   }
 
   // sidenavMode: 'side' | 'over' | 'push' = 'side';
@@ -221,6 +221,11 @@ export class SideNavComponent implements OnInit {
     this.isDrawerOpen = !this.isDrawerOpen;
     this.sidenavMode = this.isDrawerOpen ? 'over' : 'side'; 
     this.isOpen = !this.isOpen;
+    if(!this.isOpen){
+      this.navMenu1.forEach(item =>{
+        if(item.isExpanded) item.isExpanded = false;
+      })
+    }
   }
 
   changeSidenavMode(event: any) {
@@ -231,7 +236,7 @@ export class SideNavComponent implements OnInit {
     item.isExpanded = !item.isExpanded;
   }
   toggleItem1(item: UserParams): void {
-    item.isExpanded = !item.isExpanded;
+    item.isExpanded = !item.isExpanded;  
   }
 
   onMouseOver(){
@@ -244,8 +249,36 @@ export class SideNavComponent implements OnInit {
   }  
 
   public logout(){
+    // this.spinner.show();
+    // setTimeout(() => { 
+    //   this.authService.logout().subscribe({
+    //     next: () => this.spinner.hide(),
+    //     // Levanta alerta de error al usuario
+    //     error: (response) => {
+    //       this.spinner.hide();
+    //     } 
+    //   })
+    // }, 1000);
     this.authService.logout();
     // this.router.navigateByUrl('/sign-up');
+  }
+
+  reRirectPath(item: any){
+    // En el componente de origen
+    localStorage.setItem('submodules', JSON.stringify(item.submodules));
+    console.log(item.moduleRoute);
+    this.router.navigateByUrl(`dashboard/${item.moduleRoute}`); 
+    // this.router.navigateByUrl('/planear');
+  }
+
+  reRirectPath1(item: any){
+    // En el componente de origen
+    localStorage.setItem('submodules1', JSON.stringify(item));
+    console.log(item);
+    const pathList = item.submoduleRoute.split('/');
+    console.log(pathList);
+    this.router.navigateByUrl(`dashboard/${pathList[0]}/${pathList[2]}`); 
+    // this.router.navigateByUrl('dashboard/planear/capacitacion'); 
   }
   
 }

@@ -3,25 +3,16 @@ import { MaterialComponent } from '../../../shared/material/material.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
-import {FloatLabelType, MatFormFieldModule} from '@angular/material/form-field';
-import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-  keyframes
-  // ...
-} from '@angular/animations';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth/auth.service';
-import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
 import { ToastrAlertService } from '../../../services/toastr/toastr-alert.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerService } from "ngx-spinner";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-sign-in',
@@ -35,6 +26,7 @@ import { ToastrAlertService } from '../../../services/toastr/toastr-alert.servic
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
+    NgxSpinnerModule, 
     RouterLink,
     RouterOutlet
   ],
@@ -48,6 +40,7 @@ export class SignInComponent implements OnInit, OnDestroy {
   private router      = inject(Router);
   private authService = inject(AuthService);
   private toastr      = inject(ToastrAlertService);
+  private spinner     = inject(NgxSpinnerService);
 
   @ViewChild('container')
   container!: ElementRef;
@@ -55,8 +48,8 @@ export class SignInComponent implements OnInit, OnDestroy {
 
   // Variables de formulario
   public loginForm = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}')]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
+    email: ['angelobessolo@gmail.com', [Validators.required, Validators.email, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}')]],
+    password: ['angelobessolo125', [Validators.required, Validators.minLength(8)]],
     
   });
   // public loginForm!: FormGroup;
@@ -78,7 +71,7 @@ export class SignInComponent implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit(): void {
-  
+
   }
 
   ngOnDestroy() {
@@ -153,16 +146,23 @@ export class SignInComponent implements OnInit, OnDestroy {
     const {email, password} = this.loginForm.value;
 
     if(email && password){
-      this.authService.login(email, password).subscribe({
-        // Redirecciona a el dashboard si la autenticación es valida
-        next: () => this.router.navigateByUrl('dashboard'),
-        // Levanta alerta de error al usuario
-        error: (response) => {
-          const title = 'Login Response';
-          const message = response.error.message
-          this.toastr.showError(title, message);
-        } 
-      })
+      this.spinner.show();
+      setTimeout(() => { 
+        this.authService.login(email, password).subscribe({
+          // Redirecciona a el dashboard si la autenticación es valida
+          next: () => {
+            this.spinner.hide();
+            this.router.navigateByUrl('dashboard');
+          },
+          // Levanta alerta de error al usuario
+          error: (response) => {
+            this.spinner.hide();
+            const title = 'Login Response';
+            const message = response.error.message
+            this.toastr.showError(title, message);
+          } 
+        })
+      }, 100);
     } 
   }
 }

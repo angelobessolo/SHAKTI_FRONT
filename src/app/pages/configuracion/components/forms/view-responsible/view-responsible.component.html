@@ -1,0 +1,155 @@
+<div style="max-height: 600px;">
+    <button class="close-button"  color="primary" mat-icon-button (click)="closeDialog()">
+        <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="m-5">
+        
+        <div class="d-flex align-items-center mb-4 gap-2">
+            <mat-icon>person_add</mat-icon>
+            <h1 class="m-0">Visualizar Responsable</h1>
+        </div>
+    
+        <form [formGroup]="viewResponsibleForm">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Tipo Documento</mat-label>
+                        <mat-select formControlName="responsibleDocumentType">
+                            @for (type of documentTypes; track $index) {
+                                <mat-option [value]="type" [disabled]="true">
+                                    {{ type }}
+                                </mat-option>
+                            }
+                          
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Numero Documento</mat-label>
+                        <input matInput type="number" formControlName="responsibleDocumentNumber" readonly>
+                    </mat-form-field>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Fecha Expedicion</mat-label>
+                        <input matInput [matDatepicker]="pickerExpeditionDate" formControlName="responsibleExpeditionDate" readonly>
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle [disabled]="true" matIconSuffix [for]="pickerExpeditionDate"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerExpeditionDate></mat-datepicker>
+                    </mat-form-field>
+                    
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Nombre Responsable</mat-label>
+                        <input matInput type="text" formControlName="responsibleName" readonly>
+                    </mat-form-field>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Numero Licencia</mat-label>
+                        <input matInput type="number" formControlName="responsibleLicenseNumber" readonly>
+                    </mat-form-field>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Fecha Exp Licencia</mat-label>
+                        <input matInput [matDatepicker]="pickerLicenseExpireDate" formControlName="responsibleLicenseExpireDate" readonly>
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle [disabled]="true" matIconSuffix [for]="pickerLicenseExpireDate"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerLicenseExpireDate></mat-datepicker>
+                    </mat-form-field>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Fecha Asignacion</mat-label>
+                        <input matInput [matDatepicker]="pickerAsignDate" formControlName="responsibleAsignDate" readonly>
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle [disabled]="true" matIconSuffix [for]="pickerAsignDate"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerAsignDate></mat-datepicker>
+                    </mat-form-field>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Nit Empresa</mat-label>
+                        <input matInput type="number" formControlName="responsibleDocumentNumberCompany" readonly>
+                    </mat-form-field>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Nombre Empresa</mat-label>
+                        <input matInput type="text" formControlName="responsibleCompanyName" readonly>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Estado Actual</mat-label>
+                        <input matInput type="text" formControlName="responsibleStatus"  readonly>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Usuario Creacion</mat-label>
+                        <input matInput type="text" formControlName="responsibleUserCreate" readonly>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Fecha Creacion</mat-label>
+                        <input matInput [matDatepicker]="responsibleDateCreate" formControlName="responsibleDateCreate" readonly>
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle [disabled]="true" matIconSuffix [for]="responsibleDateCreate"></mat-datepicker-toggle>
+                        <mat-datepicker #responsibleDateCreate></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Hora Creacion</mat-label>
+                        <input matInput type="text" formControlName="responsibleHourCreate" readonly>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Fecha Modificacion</mat-label>
+                        <input matInput [matDatepicker]="responsibleDateUpdate" formControlName="responsibleDateUpdate" readonly>
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle [disabled]="true" matIconSuffix [for]="responsibleDateUpdate"></mat-datepicker-toggle>
+                        <mat-datepicker #responsibleDateUpdate></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Hora Modificacion</mat-label>
+                        <input matInput type="text" formControlName="responsibleHourUpdate" readonly>
+                    </mat-form-field>
+                </div>
+                
+            </div>
+        </form>
+
+        <div class="d-flex justify-content-end gap-2 mb-1">
+            <div class="example-button-container">
+                <button mat-fab extended style="background-color: #991919;" (click)="closeDialog()">
+                  <mat-icon>close</mat-icon>
+                  Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

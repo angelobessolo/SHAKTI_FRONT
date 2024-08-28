@@ -1,1 +1,42 @@
-<p>dashboard-verificar works!</p>
+<div class="container">
+    <div class="row gy-4 gx-4">
+        @for (submodule of submodules; track $index) {
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <mat-card class="card-modules" style="gap: 10px;">
+            <mat-card-header>
+                <mat-card-title>{{ submodule.submoduleName }}</mat-card-title>
+                <mat-card-subtitle>{{ submodule.submoduleDescription }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <!-- <a href="">
+                <mat-icon style="font-size: 25px;">{{ submodule.icon }}</mat-icon>
+                </a> -->
+                <div>
+                <mat-accordion class="example-headers-align" multi>
+                    <mat-expansion-panel >
+                    <mat-expansion-panel-header>
+                        <mat-panel-title> Acciones </mat-panel-title>
+                        <mat-panel-description>
+                        Tipos de Acciones
+                        <!-- <mat-icon style="font-size: 25px;">{{ submodule.icon }}</mat-icon> -->
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    @for (operation of submodule.submoduleItems; track $index) {
+                        <ul>
+                        <li>
+                            <a href="">{{operation}}</a>
+                        </li>
+                        </ul>
+                    }
+                    
+                    </mat-expansion-panel>
+                
+                </mat-accordion>
+                </div>
+            </mat-card-content>
+            </mat-card>
+        </div>
+        } 
+    </div>
+</div>
+  

@@ -51,8 +51,8 @@ export class DashboardMainComponent implements OnInit {
         submoduleName: child.submoduleName,
         submoduleIcon: child.submoduleIcon,
         submoduleDescription: child.submoduleDescription,
-        submoduleRoute: child.submoduleRoute,
-        submoduleItems: []
+        submoduleRoute: `${item.moduleRoute}${child.submoduleRoute}`,
+        submoduleItems: child.submoduleItems
       }))
     }));
 
