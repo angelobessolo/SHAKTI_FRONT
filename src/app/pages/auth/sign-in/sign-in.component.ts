@@ -49,7 +49,7 @@ export class SignInComponent implements OnInit, OnDestroy {
   // Variables de formulario
   public loginForm = this.formBuilder.group({
     email: ['angelobessolo@gmail.com', [Validators.required, Validators.email, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}')]],
-    password: ['angelobessolo125', [Validators.required, Validators.minLength(8)]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
     
   });
   // public loginForm!: FormGroup;

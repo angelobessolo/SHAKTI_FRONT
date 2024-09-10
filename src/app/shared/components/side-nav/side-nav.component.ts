@@ -18,6 +18,7 @@ import { NotificationsComponent } from '../notifications/notifications.component
 import {MatDividerModule} from '@angular/material/divider';
 import { AuthService } from '../../../services/auth/auth.service';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { ViewPdfComponent } from '../view-pdf/view-pdf.component';
 
 
 

@@ -24,6 +24,7 @@ import { AssignResponsibleComponent } from '../../assign-responsible/assign-resp
 import { FloatButtonComponent } from '../../../../../shared/components/float-button/float-button.component';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { getDutchPaginatorIntl } from '../../../../../shared/functions/paginator';
+import { ViewPdfComponent } from '../../../../../shared/components/view-pdf/view-pdf.component';
 
 
 
@@ -309,25 +310,18 @@ export class AssignListComponent implements OnInit, AfterViewInit {
 
       break; 
 
-      case 'view':
-        this.viewResponsible(this.rowResponsibles);
+      case 'view_document':
+        this.openDocument();
       break;
 
-      case 'documents':
-        this.documentation(this.rowResponsibles);
-      break;
-
-      case 'assign':
-        this.assign(this.rowResponsibles);
-      break;
     }
   }
 
-  viewResponsible(rowResponsibles: Responsible[]): void {
-    console.log('abre view', rowResponsibles);
-    const dialogRef = this.dialog.open(ViewResponsibleComponent,{
-      data: rowResponsibles,
+  openDocument(): void {
+    const dialogRef = this.dialog.open(ViewPdfComponent,{
+      data: [],
       width: '75%',
+      height: '90%',
       disableClose: true,
     });
     const appRoot = document.querySelector('app-root');
@@ -345,52 +339,7 @@ export class AssignListComponent implements OnInit, AfterViewInit {
     });
   }
 
-  documentation(rowResponsibles: Responsible[]): void {
-    console.log('abre view', rowResponsibles);
-    const dialogRef = this.dialog.open(DocumentsComponent,{
-      data: rowResponsibles,
-      width: '75%',
-      height: '95%',
-      disableClose: true,
-    });
-    const appRoot = document.querySelector('app-root');
-    if (appRoot) {
-      appRoot.classList.add('blur-background'); // Añadir clase al app-root
-    }
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result.status){
-        this.reloadList();
-      }
-      if (appRoot) {
-        appRoot.classList.remove('blur-background'); // Quitar clase del app-root
-      }
-    });
-  }
-
-  assign(rowResponsibles: Responsible[]): void {
-    console.log('abre view', rowResponsibles);
-    const dialogRef = this.dialog.open(AssignResponsibleComponent,{
-      data: rowResponsibles,
-      width: '600px',
-      height: '570',
-      disableClose: true,
-    });
-    const appRoot = document.querySelector('app-root');
-    if (appRoot) {
-      appRoot.classList.add('blur-background'); // Añadir clase al app-root
-    }
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result.status){
-        this.reloadList();
-      }
-      if (appRoot) {
-        appRoot.classList.remove('blur-background'); // Quitar clase del app-root
-      }
-    });
-  }
-
+  
   reloadList(): void{
     this.dataSource.data = [];
     this.responsibles = [];

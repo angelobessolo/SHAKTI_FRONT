@@ -1,0 +1,31 @@
+<div style="height: 100vh;">
+  <button class="close-button"  color="primary" mat-icon-button (click)="closeDialog()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <div class="p-4" style="height: 100%;">
+    <div class="d-flex align-items-center mb-4 gap-2">
+      <mat-icon>description</mat-icon>
+      <h2 class="m-0">VISUALIZAR DOCUMENTO</h2>
+    </div>
+
+
+    <ngx-doc-viewer
+      class="mb-4"
+      [url]="'assets/2024-08-27-BessolTech-45654556546.pdf'"
+      viewer="pdf"
+      style="width:100%; height:75%;"
+    >
+    </ngx-doc-viewer>
+
+
+    <div class="d-flex justify-content-end gap-2">
+        <div class="example-button-container">
+            <button mat-fab extended style="background-color: #991919;" (click)="closeDialog()">
+              <mat-icon>close</mat-icon>
+              Cerrar
+            </button>
+        </div>
+    </div>
+  </div>
+</div>
